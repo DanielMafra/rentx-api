@@ -1,96 +1,162 @@
-# Cadastro de carro
+# Rentx API - A complete API for car registration and rental.
 
-**RF**
-- Deve ser possível cadastrar um novo carro.
+This project was developed during the NodeJS track, available on Rocketseat's Ignite.
 
+## Table of contents
 
-**RN** 
-- Não deve ser possível cadastrar um carro com uma placa já existente.
-- O carro deve ser cadastrado, por padrão, com disponibilidade.
-- O usuário responsável pelo cadastro deve ser um usuário administrador.
+- [Overview](#overview)
+  - [The project](#the-project)
+  - [Routes](#routes)
+- [Development process](#development-process)
+  - [Built with](#built-with)
+- [Coded by](#coded-by)
+- [How to run the project](#how-to-run-the-project)
 
-# Listagem de carros
+## Overview
 
-**RF** 
-- Deve ser possível listar todos os carros disponíveis
-- Deve ser possível listar todos os carros disponíveis pelo - nome da categoria
-- Deve ser possível listar todos os carros disponíveis pelo - nome da marca
-- Deve ser possível listar todos os carros disponíveis pelo - nome do carro
+### The project
 
-**RN**
-- O usuário não precisar estar logado no sistema.
+Users should be able to:
 
+- Register a car
+- List the cars
+- Register car specifications
+- Rent a car
+- Return a car
+- List rentals by user
+- Recover password
 
-# Cadastro de Especificação no carro
+### Routes
 
-**RF**
-- Deve ser possível cadastrar uma especificação para um carro
+To get all the application routes and how to use them, after running the project, view the documentation created with Swagger, just access localhost:3333/api-docs.
 
+## Development process
 
-**RN**
-- Não deve ser possível cadastrar uma especificação para um - carro não cadastrado.
-- Não deve ser possível cadastrar uma especificação já - existente para o mesmo carro.
-- O usuário responsável pelo cadastro deve ser um usuário - administrador.
+### Built with
 
+- Express
+- BCrypt
+- JSON Web Token
+- Typeorm
+- Postgres
+- NodeJS
+- Sentry
+- Handlebars
+- Nodemailer
 
-# Cadastro de imagens do carro
+## Coded by
 
-**RF**
-- Deve ser possível cadastrar a imagem do carro
+- Website - [Daniel Mafra](https://danielmafra.github.io)
+- LinkedIn - [@danielmafradev](https://linkedin.com/in/danielmafradev)
+- Instagram - [@danielmafradev](https://instagram.com/danielmafradev)
 
-**RNF**
-- Utilizar o multer para upload dos arquivos
+## How to run the project
 
-**RN**
-- O usuário deve poder cadastrar mais de uma imagem para o - mesmo carro
-- O usuário responsável pelo cadastro deve ser um usuário - administrador.
+Clone the repository using "git clone". After that, go to the project folder and use the command "npm install" or "yarn install" to install the dependencies.
 
+Make sure you are running Postgres and rename the .env.example file to .env, and also the ormconfig.example.json file to ormconfig.json. After that, edit using your Postgres information and also other environment information.
 
-# Alugel de carro
+Finally use the command "yarn typeorm migration:run" and then "npm run dev" or "yarn dev" to start the project.
 
-**RF**
-- Deve ser possível cadastrar um aluguel
+# Guide to developing the API:
 
+## Car registration
 
-**RN**
-- O aluguel deve ter duração mínima de 24 horas.
-- Não deve ser possível cadastrar um novo aluguel caso já - exista um aberto para o mesmo usuário
-- Não deve ser possível cadastrar um novo aluguel caso já - exista um aberto para o mesmo carro
-- O usuário deve estar logado na aplicação
-- Ao realizar um aluguel, o status do carro deverá ser - alterado para indisponível
+- FR: Functional Requirements
+- BR: Business rules
+- NFR: Non-functional requirements
 
-
-# Devolução de carro 
-
-**RF**
-- Deve ser possível realizar a devolução de um carro
-
-**RN**
-- Se o carro for devolvido com menos de 24 horas, deverá - ser cobrado diária completa.
-- Ao realizar a devolução, o carro deverá ser liberado para - outro aluguel.
-- Ao realizar a devolução, o usuário deverá ser liberado - para outro aluguel.
-- Ao realizar a devolução, deverá ser calculado o total do - aluguel. 
-- Caso o horário de devolução seja superior ao horário - previsto de entrega, deverá ser cobrado multa - proporcional aos dias de atraso.
-- Caso haja multa, deverá ser somado ao total do aluguel.
-- O usuário deve estar logado na aplicação
+**FR**
+- It must be possible to register a new car.
 
 
-# Listagem de Alugueis para usuário
+**BR** 
+- It must not be possible to register a car with an existing license plate.
+- The car must be registered, by default, with availability.
+- The user responsible for registration must be an administrator user.
 
-**RF**
-- Deve ser possível realizar a busca de todos os alugueis para o usuário
+## Car listing
 
-**RN**
-- O usuário deve estar logado na aplicação
+**FR** 
+- It should be possible to list all available cars
+- It should be possible to list all available cars by - category name
+- It should be possible to list all available cars by - brand name
+- It should be possible to list all available cars by - car name
+
+**BR**
+- The user does not need to be logged into the system.
 
 
-# Recuperar Senha
+## Car Specification Registration
 
-**RF**
-- Deve ser possível o usuário recuperar a senha informando o e-mail
-- O usuário deve receber um e-mail com o passo a passo para a recuperação da senha
-- O usuário deve conseguir inserir uma nova senha
+**FR**
+- It must be possible to register a specification for a car
 
-**RN**
-- O usuário precisa informar uma nova senha
-- O link enviado para a recuperação deve expirar em 3 horas
+
+**BR**
+- It must not be possible to register a specification for a - unregistered car.
+- It must not be possible to register an existing specification for the same car.
+- The user responsible for registration must be a user - administrator.
+
+
+## Car image registration
+
+**FR**
+- It must be possible to register the car image
+
+**NFR**
+- Use multer to upload files
+
+**BR**
+- The user must be able to register more than one image for the same car
+- The user responsible for registration must be a user - administrator.
+
+
+## Car rental
+
+**FR**
+- It must be possible to register a rental
+
+
+**BR**
+- The rental must have a minimum duration of 24 hours.
+- It should not be possible to register a new rental if it already exists - there is one open for the same user
+- It should not be possible to register a new rental if it already exists - there is one open for the same car
+- The user must be logged in to the application
+- When renting, the status of the car must be - changed to unavailable
+
+
+## Car return 
+
+**FR**
+- It must be possible to return a car
+
+**BR**
+- If the car is returned with less than 24 hours, it must be - charged in full daily.
+- When returning, the car must be released for - another rental.
+- When making the return, the user must be released - for another rental.
+- When returning, the total rent must be calculated.
+- If the return time is longer than the scheduled delivery time, a fine will be charged - proportional to the days of delay.
+- If there is a fine, it must be added to the total rent.
+- The user must be logged in to the application
+
+
+## User Rental Listing
+
+**FR**
+- It must be possible to search all rentals for the user
+
+**BR**
+- The user must be logged in to the application
+
+
+## Recover Password
+
+**FR**
+- It must be possible for the user to recover the password by entering the email
+- The user should receive an email with the step-by-step password recovery
+- User must be able to enter a new password
+
+**BR**
+- User needs to enter a new password
+- Link sent for recovery must expire in 3 hours
